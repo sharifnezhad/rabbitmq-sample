@@ -1,5 +1,7 @@
 <?php
+
 use Symfony\Component\Mailer\Transport;
+
 return [
 
     /*
@@ -96,6 +98,7 @@ return [
                 ],
                 'queue' => [
                     'job' => VladimirYuldashev\LaravelQueueRabbitMQ\Queue\Jobs\RabbitMQJob::class,
+                    ''
                 ],
             ],
 

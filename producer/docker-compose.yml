@@ -1,8 +1,12 @@
 version: '3.8'
 services:
     webapp:
-        image: php:8.1.2-apache
-        command: 'php ./artisan serve --host=0.0.0.0'
+        build:
+            args:
+                user: sammy
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
         volumes:
             - .:/var/www/html/
         ports:
@@ -15,9 +19,10 @@ services:
     db:
         image: mysql:8.0
         environment:
-            MYSQL_ROOT_PASSWORD: 'pass'
-            MYSQL_DATABASE: 'laravel'
-            MYSQL_PASSWORD: 'pass'
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
         volumes:
             - ./storage/dbdata:/var/lib/mysql
         ports:
